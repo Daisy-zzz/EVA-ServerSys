@@ -1,12 +1,14 @@
 import json
 import os
 import logging
-from flask import Flask, request, jsonify
+from flask import Flask, request
 import yaml
 from .server import Server
-import time
+from utils import merge_boxes_in_results
 app = Flask(__name__)
-server = None
+# server = Server()
+
+resolution = 1
 
 
 @app.route("/")
@@ -35,8 +37,12 @@ def perform_low_images():
     result = dict(request.form)
     image = request.files["image"]
     image.save(os.path.join('../server_temp/', result['name']))
-    # result = server.detect(image)
-    # TODO: Detect images and save results
+    # temp = []
+    # results, rpn_results = server.perform_detection('../server_temp/', resolution, result['name'])
+    # results = merge_boxes_in_results(results.regions_dict, 0.3, 0.3)
+    # for region in results.regions:
+    #     temp.append([region.x, region.y, region.w, region.h, region.conf])
+    print(result['name'])
     return "detect success"
 
 
