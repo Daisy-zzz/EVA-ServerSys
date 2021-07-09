@@ -8,8 +8,6 @@ from utils import merge_boxes_in_results
 app = Flask(__name__)
 # server = Server()
 
-resolution = 1
-
 
 @app.route("/")
 @app.route("/index")
@@ -34,21 +32,19 @@ def initialize_server():
 
 @app.route("/low", methods=["POST"])
 def perform_low_images():
-    result = dict(request.form)
+    result = request.form
     image = request.files["image"]
     image.save(os.path.join('../server_temp/', result['name']))
-    # temp = []
-    # results, rpn_results = server.perform_detection('../server_temp/', resolution, result['name'])
-    # results = merge_boxes_in_results(results.regions_dict, 0.3, 0.3)
-    # for region in results.regions:
-    #     temp.append([region.x, region.y, region.w, region.h, region.conf])
-    print(result['name'])
+    result_file = open("low_img.txt", "a")
+    result_file.write(f"{result.get('name')}, {result.getlist('shape')}, {result.get('conf')}\n")
+    result_file.close()
     return "detect success"
 
 
 @app.route("/high", methods=["POST"])
 def perform_high_images():
     result = json.loads(request.data)
-    print(result)
-    # TODO: Save results
+    result_file = open("high_img.txt", "a")
+    result_file.write(f"{result['name']}, {result['shape']}, {result['conf']}\n")
+    result_file.close()
     return "save success"

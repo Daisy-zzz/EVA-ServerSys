@@ -131,3 +131,6 @@ dmypy.json
 
 # model
 /frozen_inference_graph.pb
+
+/dataset/
+/server_temp/

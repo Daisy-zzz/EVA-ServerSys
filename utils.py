@@ -279,8 +279,7 @@ class Results:
             # prepare the string to write
             str_to_write = (f"{region.fid},{region.x},{region.y},"
                             f"{region.w},{region.h},"
-                            f"{region.label},{region.conf},"
-                            f"{region.resolution}\n")
+                            f"{region.label},{region.conf}\n")
             results_file.write(str_to_write)
         results_file.close()
 
