@@ -1,7 +1,7 @@
 import json
 import os
 import logging
-from flask import Flask, request
+from flask import Flask, request, make_response
 import yaml
 from .server import Server
 from utils import merge_boxes_in_results
@@ -32,13 +32,15 @@ def initialize_server():
 
 @app.route("/low", methods=["POST"])
 def perform_low_images():
+    change_threshold = "0.0"
     result = request.form
     image = request.files["image"]
     image.save(os.path.join('../server_temp/', result['name']))
     result_file = open("low_img.txt", "a")
     result_file.write(f"{result.get('name')}, {result.getlist('shape')}, {result.get('conf')}\n")
     result_file.close()
-    return "detect success"
+    response = make_response(change_threshold)
+    return response
 
 
 @app.route("/high", methods=["POST"])

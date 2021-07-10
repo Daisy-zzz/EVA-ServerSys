@@ -7,6 +7,8 @@ extracted_frames
 test.mp4
 *.pb
 server_temp
+./backend/high_img.txt
+./backend/low_img.txt
 # C extensions
 *.so
 
