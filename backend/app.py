@@ -1,12 +1,26 @@
 import json
 import os
 import logging
+import shutil
+
 from flask import Flask, request, make_response
 import yaml
 from .server import Server
 from utils import merge_boxes_in_results
+
 app = Flask(__name__)
+
+
 # server = Server()
+
+
+@app.before_first_request
+def init():
+    for file in ['./low_img.txt', './high_img.txt']:
+        if os.path.isfile(file):
+            os.remove(file)
+        f = open(file, 'w+')
+        f.close()
 
 
 @app.route("/")
