@@ -55,7 +55,8 @@ def perform_low_images():
     image = request.files["image"]
     image.save(os.path.join('../server_temp/', result['name']))
     result_file = open("low_img.txt", "a")
-    result_file.write(f"{result.get('name')}, {result.getlist('shape')}, {result.get('conf')}\n")
+    result_file.write(f"{result.get('name')}, {result.getlist('shape')[0]}, {result.getlist('shape')[1]},"
+                      f"{result.getlist('shape')[2]}, {result.getlist('shape')[3]}, {result.get('conf')}, {result.get('label')}\n")
     result_file.close()
     response = make_response(change_threshold)
     return response
@@ -65,6 +66,6 @@ def perform_low_images():
 def perform_high_images():
     result = json.loads(request.data)
     result_file = open("high_img.txt", "a")
-    result_file.write(f"{result['name']}, {result['shape']}, {result['conf']}\n")
+    result_file.write(f"{result['name']}, {result['shape'][0]}, {result['shape'][1]}, {result['shape'][2]}, {result['shape'][3]}, {result['conf']}, {result['label']}\n")
     result_file.close()
     return "save success"
