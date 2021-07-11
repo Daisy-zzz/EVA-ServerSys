@@ -21,6 +21,10 @@ def init():
             os.remove(file)
         f = open(file, 'w+')
         f.close()
+    for dirs in ['./server_temp']:
+        if os.path.isdir(dirs):
+            shutil.rmtree(dirs)
+        os.mkdir(dirs)
 
 
 @app.route("/")
