@@ -11,6 +11,7 @@ backend/high_img.txt
 backend/low_img.txt
 # C extensions
 *.so
+frozen_inference_graph.pb
 
 # Distribution / packaging
 .Python
