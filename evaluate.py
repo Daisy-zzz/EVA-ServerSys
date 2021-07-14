@@ -53,7 +53,7 @@ def gt():
 
 
 def cova():
-    gt_path = "dashcam_1_gt"
+    gt_path = "trafficcam_2_gt"
     cova_path = "./backend/high_img.txt"
     gt_box = {}
     cova_box = {}
@@ -111,7 +111,7 @@ def cova():
                 # print(box[4])
                 fp += 1
                 count.append(0)
-    print(tp, fp, round(tp / (tp + fp), 3))
+    print(tp, fp, round(tp / (tp + fp), 5))
     for i in range(len(count) - 50):
         t = 0
         for j in range(50):
